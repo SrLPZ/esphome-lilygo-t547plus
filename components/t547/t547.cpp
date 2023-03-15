@@ -38,10 +38,8 @@ size_t T547::get_buffer_length_() {
 }
 
 void T547::update() {
-  this->eink_on_();
   this->do_update_();
   this->display();
-  this->eink_off_();
 }
 
 void HOT T547::draw_absolute_pixel_internal(int x, int y, Color color) {
@@ -77,7 +75,8 @@ void T547::display() {
   uint32_t start_time = millis();
 
   epd_poweron();
-  epd_clear();
+  //epd_clear();
+  epd_draw_image(epd_full_screen(), this->buffer_, WHITE_ON_BLACK);
   epd_draw_grayscale_image(epd_full_screen(), this->buffer_);
   epd_poweroff();
 
