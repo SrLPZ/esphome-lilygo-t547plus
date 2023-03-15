@@ -38,8 +38,10 @@ size_t T547::get_buffer_length_() {
 }
 
 void T547::update() {
+  this->eink_on_();
   this->do_update_();
   this->display();
+  this->eink_off_();
 }
 
 void HOT T547::draw_absolute_pixel_internal(int x, int y, Color color) {
