@@ -73,8 +73,6 @@ void T547::display() {
   ESP_LOGV(TAG, "Display called");
   uint32_t start_time = millis();
   
-  epd_init();
-  delay(500);
   epd_poweron();
   ESP_LOGV(TAG, "Clear");
   epd_clear();
