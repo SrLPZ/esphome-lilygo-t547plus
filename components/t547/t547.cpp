@@ -72,9 +72,10 @@ void T547::eink_on_() {
 void T547::display() {
   ESP_LOGV(TAG, "Display called");
   uint32_t start_time = millis();
-
-  epd_poweron();
+  
+  epd_init();
   delay(500);
+  epd_poweron();
   ESP_LOGV(TAG, "Clear");
   epd_clear();
   //epd_draw_image(epd_full_screen(), this->buffer_, WHITE_ON_BLACK);
