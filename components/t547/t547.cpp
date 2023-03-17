@@ -74,10 +74,12 @@ void T547::display() {
   uint32_t start_time = millis();
 
   epd_poweron();
+  delay(500);
+  ESP_LOGV(TAG, "Clear");
   epd_clear();
   //epd_draw_image(epd_full_screen(), this->buffer_, WHITE_ON_BLACK);
   epd_draw_grayscale_image(epd_full_screen(), this->buffer_);
-  //epd_poweroff();
+  epd_poweroff();
   epd_poweroff_all();
 
   ESP_LOGV(TAG, "Display finished (full) (%ums)", millis() - start_time);
