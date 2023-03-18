@@ -25,6 +25,9 @@ class T547 : public PollingComponent, public display::DisplayBuffer {
   void display();
   void clean();
   void update() override;
+ 
+  void eink_off_();
+  void eink_on_();
 
   void setup() override;
 
@@ -39,9 +42,6 @@ class T547 : public PollingComponent, public display::DisplayBuffer {
 
  protected:
   void draw_absolute_pixel_internal(int x, int y, Color color) override;
-
-  void eink_off_();
-  void eink_on_();
 
 
   int get_width_internal() override { return 960; }
