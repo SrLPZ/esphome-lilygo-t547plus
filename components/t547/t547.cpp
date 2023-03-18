@@ -66,7 +66,7 @@ void T547::eink_off_all() {
     return;
   epd_poweroff_all();
   ESP_LOGV(TAG, "Scan OFF");
-  panel_on_ = 0;
+  //panel_on_ = 0;
 }  
 
 void T547::eink_on_() {
