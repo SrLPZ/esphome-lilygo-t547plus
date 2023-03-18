@@ -54,26 +54,26 @@ void T547::dump_config() {
 }
 
 void T547::eink_off_() {
-  ESP_LOGV(TAG, "OFF");
   if (panel_on_ == 0)
     return;
   epd_poweroff();
+  ESP_LOGV(TAG, "OFF");
   panel_on_ = 0;
 }
 
 void T547::eink_off_all() {
-  ESP_LOGV(TAG, "OFF all");
-  //if (panel_on_ == 0)
-  //  return;
+  if (panel_on_ == 0)
+    return;
   epd_poweroff_all();
+  ESP_LOGV(TAG, "OFF all");
   panel_on_ = 0;
 }  
 
 void T547::eink_on_() {
-  ESP_LOGV(TAG, "ON");
   if (panel_on_ == 1)
     return;
   epd_poweron();
+  ESP_LOGV(TAG, "ON");
   panel_on_ = 1;
 }
 
