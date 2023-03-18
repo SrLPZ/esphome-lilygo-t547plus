@@ -54,7 +54,7 @@ void T547::dump_config() {
 }
 
 void T547::eink_off_() {
-  ESP_LOGV(TAG, "Eink off called");
+  ESP_LOGV(TAG, "OFF");
   if (panel_on_ == 0)
     return;
   epd_poweroff();
@@ -62,7 +62,7 @@ void T547::eink_off_() {
 }
 
 void T547::eink_off_all() {
-  ESP_LOGV(TAG, "Eink off called");
+  ESP_LOGV(TAG, "OFF all");
   if (panel_on_ == 0)
     return;
   epd_poweroff_all();
@@ -70,7 +70,7 @@ void T547::eink_off_all() {
 }  
 
 void T547::eink_on_() {
-  ESP_LOGV(TAG, "Eink on called");
+  ESP_LOGV(TAG, "ON");
   if (panel_on_ == 1)
     return;
   epd_poweron();
@@ -78,14 +78,13 @@ void T547::eink_on_() {
 }
 
 void T547::display() {
-  ESP_LOGV(TAG, "Display called");
   uint32_t start_time = millis();
-  
   //epd_poweron();
   eink_on_();
   ESP_LOGV(TAG, "Clear");
   epd_clear();
   //epd_draw_image(epd_full_screen(), this->buffer_, WHITE_ON_BLACK);
+  ESP_LOGV(TAG, "Updating...");
   epd_draw_grayscale_image(epd_full_screen(), this->buffer_);
   //epd_poweroff();
   //epd_poweroff_all();
