@@ -57,9 +57,17 @@ void T547::eink_off_() {
   ESP_LOGV(TAG, "Eink off called");
   if (panel_on_ == 0)
     return;
-  epd_poweroff_all();
+  epd_poweroff();
   panel_on_ = 0;
 }
+
+void T547::eink_off_all() {
+  ESP_LOGV(TAG, "Eink off called");
+  if (panel_on_ == 0)
+    return;
+  epd_poweroff_all();
+  panel_on_ = 0;
+}  
 
 void T547::eink_on_() {
   ESP_LOGV(TAG, "Eink on called");
