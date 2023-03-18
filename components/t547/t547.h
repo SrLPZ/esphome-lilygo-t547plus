@@ -29,6 +29,8 @@ class T547 : public PollingComponent, public display::DisplayBuffer {
   void eink_off_();
   void eink_off_all();
   void eink_on_();
+  void scan_on();
+  void scan_off();
 
   void setup() override;
 
