@@ -145,5 +145,12 @@ display:
   id: t5_display
   update_interval: never
   lambda: |-
-      it.strftime(xCenter, 270, id(Hour), TextAlign::BASELINE_CENTER, "%H:%M", id(ntp).now());
-      it.strftime(xCenter, 340, id(Date), TextAlign::BASELINE_CENTER, "%d-%m-%Y", id(ntp).now());
+      // positioning constants
+      #define xRes 960
+      #define yRes 540
+      #define xCenter (xRes/2) // X position center
+      #define yCenter (yRes/2) // Y position center
+      #define pad 10
+      
+      it.strftime(xCenter, yCenter, id(Hour), TextAlign::BASELINE_CENTER, "%H:%M", id(ntp).now());
+      it.strftime(xCenter, yCenter+70, id(Date), TextAlign::BASELINE_CENTER, "%d-%m-%Y", id(ntp).now());
