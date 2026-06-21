@@ -49,7 +49,7 @@ logger:
 # https://esphome.io/components/api.html
 api:
   encryption:
-    key: !secret api_key
+    key: YOUR_ENCRYPTION_KEY_HERE
   on_client_connected:
     then:
       - lambda: id(t5_display).scan_on();
@@ -59,7 +59,7 @@ api:
 ota:
   - platform: esphome
     id: my_ota
-    password:  !secret ota_password
+    password: YOUR_PASSWORD_OTA_HERE
 
 wifi:
   power_save_mode: none
@@ -71,7 +71,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Liligo-T5-47-Epaper-Plus"
-    password: "123456"
+    password: "12345678"
 
 captive_portal:
   
@@ -94,6 +94,16 @@ external_components:
   - source: github://SrLPZ/esphome-lilygo-t547plus
     components: ["t547"]
 
+font:
+  - file: gfonts://Roboto Mono
+    id: Hour
+    size: 200
+    glyphs: "+-0123456789.:"
+
+  - file: gfonts://Roboto
+    id: Date
+    size: 50
+    
 time:
   # - platform: pcf8563
   #   id: internal_clock
@@ -135,5 +145,5 @@ display:
   id: t5_display
   update_interval: never
   lambda: |-
-      it.strftime(xCenter, 170, id(Hour), TextAlign::BASELINE_CENTER, "%H:%M", id(ntp).now());
-      it.strftime(xCenter, 240, id(Date), TextAlign::BASELINE_CENTER, "%d-%m-%Y", id(ntp).now());
+      it.strftime(xCenter, 270, id(Hour), TextAlign::BASELINE_CENTER, "%H:%M", id(ntp).now());
+      it.strftime(xCenter, 340, id(Date), TextAlign::BASELINE_CENTER, "%d-%m-%Y", id(ntp).now());
