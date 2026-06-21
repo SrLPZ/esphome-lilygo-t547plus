@@ -49,7 +49,7 @@ logger:
 # https://esphome.io/components/api.html
 api:
   encryption:
-    key: YOUR_ENCRYPTION_KEY_HERE
+    # key: YOUR_ENCRYPTION_KEY_HERE
   on_client_connected:
     then:
       - lambda: id(t5_display).scan_on();
@@ -59,7 +59,7 @@ api:
 ota:
   - platform: esphome
     id: my_ota
-    password: YOUR_PASSWORD_OTA_HERE
+    # password: YOUR_PASSWORD_OTA_HERE
 
 wifi:
   power_save_mode: none
