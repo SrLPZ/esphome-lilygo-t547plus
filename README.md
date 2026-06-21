@@ -9,12 +9,11 @@ This repository is a fork and enhancement of the original component created by [
 In E-Paper displays controlled via automated scanning/refresh interfaces, maintaining the screen active or refreshing it constantly can increase power consumption or cause unnecessary pixel burnout when the display is idle.
 
 To solve this, this version introduces two new lambda methods to manually control when the display should refresh or poll data:
-* **`id(your_display_id).scan_on();`**: Activates the display scanning/processing loop right before you trigger an update.
-* **`id(your_display_id).scan_off();`**: Deactivates the scanning loop immediately after the update finishes, optimizing performance.
+* **`- lambda: id(t5_display).scan_on();`**: Activates the display scanning/processing loop right before you trigger an update.
+* **`- component.update: t5_display`**: Update display.
+* **`- lambda: id(t5_display).scan_off();`**: Deactivates the scanning loop immediately after the update finishes, optimizing performance.
 
-As shown in the example below, by setting `update_interval: never` on the display component, you gain full control and can wrap your `.update` calls between `scan_on()` and `scan_off()` inside automations, button presses, or time triggers.
-
----
+As shown in the example below, by setting `update_interval: never` on the display component, you gain full control and can wrap your `update` calls between `scan_on()` and `scan_off()` inside automations, button presses, or time triggers.
 
 ## Configuration Example
 
