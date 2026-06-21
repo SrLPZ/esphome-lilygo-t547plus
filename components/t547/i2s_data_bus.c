@@ -5,7 +5,7 @@
 
 #include "i2s_data_bus.h"
 
-#include <driver/periph_ctrl.h>
+#include <esp_private/periph_ctrl.h
 #include <esp_heap_caps.h>
 #include <rom/lldesc.h>
 #include <soc/i2s_reg.h>
