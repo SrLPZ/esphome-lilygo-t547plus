@@ -69,7 +69,7 @@ static void gpio_setup_out(int32_t gpio, int32_t sig, bool invert);
 /**
  * @brief Resets "Start Pulse" signal when the current row output is done.
  */
-static void IRAM_ATTR i2s_int_hdl(void *arg);
+static void i2s_int_hdl(void *arg);
 #endif
 
 /******************************************************************************/
@@ -111,13 +111,13 @@ static uint8_t buffer[(960 + 32) / 4] = { 0 };
 /******************************************************************************/
 
 #if USER_I2S_REG
-volatile uint8_t IRAM_ATTR *i2s_get_current_buffer()
+volatile uint8_t *i2s_get_current_buffer()
 {
     return current_buffer ? i2s_state.dma_desc_a->buf
                           : i2s_state.dma_desc_b->buf;
 }
 #else
-volatile uint8_t IRAM_ATTR *i2s_get_current_buffer()
+volatile uint8_t *i2s_get_current_buffer()
 {
     return buffer;
 }
@@ -125,7 +125,7 @@ volatile uint8_t IRAM_ATTR *i2s_get_current_buffer()
 
 
 #if USER_I2S_REG
-bool IRAM_ATTR i2s_is_busy()
+bool i2s_is_busy()
 {
     // DMA and FIFO must be done
 #ifdef CONFIG_IDF_TARGET_ESP32
@@ -139,7 +139,7 @@ bool IRAM_ATTR i2s_is_busy()
 
 }
 #else
-bool IRAM_ATTR i2s_is_busy()
+bool i2s_is_busy()
 {
     return !output_done;
 }
@@ -147,7 +147,7 @@ bool IRAM_ATTR i2s_is_busy()
 
 
 #if USER_I2S_REG
-void IRAM_ATTR i2s_switch_buffer()
+void i2s_switch_buffer()
 {
     // either device is done transmitting or the switch must be away from the
     // buffer currently used by the DMA engine.
@@ -161,14 +161,14 @@ void IRAM_ATTR i2s_switch_buffer()
     current_buffer = !current_buffer;
 }
 #else
-void IRAM_ATTR i2s_switch_buffer()
+void i2s_switch_buffer()
 {
 }
 #endif
 
 
 #if USER_I2S_REG
-void IRAM_ATTR i2s_start_line_output()
+void i2s_start_line_output()
 {
     output_done = false;
 
@@ -194,7 +194,7 @@ void IRAM_ATTR i2s_start_line_output()
     dev->conf.tx_start = 1;
 }
 #else
-void IRAM_ATTR i2s_start_line_output()
+void i2s_start_line_output()
 {
     output_done = false;
 
@@ -460,7 +460,7 @@ static void gpio_setup_out(int32_t gpio, int32_t sig, bool invert)
 
 
 /// Resets "Start Pulse" signal when the current row output is done.
-static void IRAM_ATTR i2s_int_hdl(void *arg)
+static void i2s_int_hdl(void *arg)
 {
 #ifdef CONFIG_IDF_TARGET_ESP32
     i2s_dev_t *dev = &I2S1;
