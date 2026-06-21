@@ -72,20 +72,20 @@ static void write_row(uint32_t output_time_dus);
  */
 static void skip_row(uint8_t pipeline_finish_time);
 
-static void IRAM_ATTR reset_lut(uint8_t *lut_mem, DrawMode_t mode);
+static void reset_lut(uint8_t *lut_mem, DrawMode_t mode);
 
-static void IRAM_ATTR update_LUT(uint8_t *lut_mem, uint8_t k, DrawMode_t mode);
+static void update_LUT(uint8_t *lut_mem, uint8_t k, DrawMode_t mode);
 
 /**
  * @brief bit-shift a buffer `shift` <= 7 bits to the right.
  */
-static void IRAM_ATTR bit_shift_buffer_right(uint8_t *buf, uint32_t len, int32_t shift);
+static void bit_shift_buffer_right(uint8_t *buf, uint32_t len, int32_t shift);
 
-static void IRAM_ATTR nibble_shift_buffer_right(uint8_t *buf, uint32_t len);
+static void nibble_shift_buffer_right(uint8_t *buf, uint32_t len);
 
-static void IRAM_ATTR provide_out(OutputParams *params);
+static void provide_out(OutputParams *params);
 
-static void IRAM_ATTR feed_display(OutputParams *params);
+static void feed_display(OutputParams *params);
 
 static void epd_fill_circle_helper(int32_t x0, int32_t y0, int32_t r, int32_t corners, int32_t delta,
                             uint8_t color, uint8_t *framebuffer);
@@ -250,7 +250,7 @@ void epd_clear()
 }
 
 
-void IRAM_ATTR calc_epd_input_4bpp(uint32_t *line_data, uint8_t *epd_input,
+void calc_epd_input_4bpp(uint32_t *line_data, uint8_t *epd_input,
                                    uint8_t k, uint8_t *conversion_lut)
 {
     uint32_t *wide_epd_input = (uint32_t *)epd_input;
@@ -280,7 +280,7 @@ void IRAM_ATTR calc_epd_input_4bpp(uint32_t *line_data, uint8_t *epd_input,
 }
 
 
-void IRAM_ATTR calc_epd_input_1bpp(uint8_t *line_data, uint8_t *epd_input,
+void calc_epd_input_1bpp(uint8_t *line_data, uint8_t *epd_input,
                                    DrawMode_t mode)
 {
     uint32_t *wide_epd_input = (uint32_t *)epd_input;
@@ -715,13 +715,13 @@ void epd_copy_to_framebuffer(Rect_t image_area, uint8_t *image_data,
 }
 
 
-void IRAM_ATTR epd_draw_grayscale_image(Rect_t area, uint8_t *data)
+void epd_draw_grayscale_image(Rect_t area, uint8_t *data)
 {
     epd_draw_image(area, data, BLACK_ON_WHITE);
 }
 
 
-void IRAM_ATTR epd_draw_frame_1bit(Rect_t area, uint8_t *ptr,
+void epd_draw_frame_1bit(Rect_t area, uint8_t *ptr,
                                    DrawMode_t mode, int32_t time)
 {
     epd_start_frame();
@@ -810,7 +810,7 @@ void IRAM_ATTR epd_draw_frame_1bit(Rect_t area, uint8_t *ptr,
 }
 
 
-void IRAM_ATTR epd_draw_image(Rect_t area, uint8_t *data, DrawMode_t mode)
+void epd_draw_image(Rect_t area, uint8_t *data, DrawMode_t mode)
 {
     uint8_t frame_count = 15;
 
@@ -909,7 +909,7 @@ static void reorder_line_buffer(uint32_t *line_data)
 }
 
 
-static void IRAM_ATTR reset_lut(uint8_t *lut_mem, DrawMode_t mode)
+static void reset_lut(uint8_t *lut_mem, DrawMode_t mode)
 {
     switch (mode)
     {
@@ -927,7 +927,7 @@ static void IRAM_ATTR reset_lut(uint8_t *lut_mem, DrawMode_t mode)
 }
 
 
-static void IRAM_ATTR update_LUT(uint8_t *lut_mem, uint8_t k, DrawMode_t mode)
+static void update_LUT(uint8_t *lut_mem, uint8_t k, DrawMode_t mode)
 {
     if (mode == BLACK_ON_WHITE || mode == WHITE_ON_WHITE)
     {
@@ -962,7 +962,7 @@ static void IRAM_ATTR update_LUT(uint8_t *lut_mem, uint8_t k, DrawMode_t mode)
 }
 
 
-static void IRAM_ATTR bit_shift_buffer_right(uint8_t *buf, uint32_t len, int32_t shift)
+static void bit_shift_buffer_right(uint8_t *buf, uint32_t len, int32_t shift)
 {
     uint8_t carry = 0x00;
     for (uint32_t i = 0; i < len; i++)
@@ -973,7 +973,7 @@ static void IRAM_ATTR bit_shift_buffer_right(uint8_t *buf, uint32_t len, int32_t
     }
 }
 
-static void IRAM_ATTR nibble_shift_buffer_right(uint8_t *buf, uint32_t len)
+static void nibble_shift_buffer_right(uint8_t *buf, uint32_t len)
 {
     uint8_t carry = 0xF;
     for (uint32_t i = 0; i < len; i++)
@@ -984,7 +984,7 @@ static void IRAM_ATTR nibble_shift_buffer_right(uint8_t *buf, uint32_t len)
     }
 }
 
-static void IRAM_ATTR provide_out(OutputParams *params)
+static void provide_out(OutputParams *params)
 {
     uint8_t line[EPD_WIDTH / 2];
     memset(line, 255, EPD_WIDTH / 2);
@@ -1066,7 +1066,7 @@ static void IRAM_ATTR provide_out(OutputParams *params)
 }
 
 
-static void IRAM_ATTR feed_display(OutputParams *params)
+static void feed_display(OutputParams *params)
 {
     Rect_t area = params->area;
     const int32_t *contrast_lut = contrast_cycles_4;
