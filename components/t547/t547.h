@@ -29,7 +29,8 @@ class T547 : public PollingComponent, public display::DisplayBuffer {
   void display();
   void clean();
   void update() override;
-
+  void scan_on();
+  void scan_off();
   void setup() override;
 
   uint8_t get_panel_state() { return this->panel_on_; }
@@ -45,8 +46,8 @@ class T547 : public PollingComponent, public display::DisplayBuffer {
   void draw_absolute_pixel_internal(int x, int y, Color color) override;
 
   void eink_off_();
+  void eink_off_all();
   void eink_on_();
-
 
   int get_width_internal() override { return 960; }
 
